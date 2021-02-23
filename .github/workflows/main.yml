@@ -1,0 +1,60 @@
+# This is a basic workflow to help you get started with Actions
+name: Attendance Record
+
+# Controls when the action will run. 
+on:
+  workflow_dispatch:
+  schedule:
+    #FIA T1
+    - cron: "0 10 * * 1"
+    #FIA TP1
+    - cron: "0 12 * * 1"
+    #SD T1
+    - cron: "0 14 * * 2"
+    #SD TP1
+    - cron: "0 16 * * 2"
+    #FIA PL7
+    - cron: "0 9 * * 3"
+    #SD PL2
+    - cron: "0 9 * * 4"
+    #CT P3
+    - cron: "0 11 * * 4"
+    #CT T1
+    - cron: "0 14 * * 4"
+    #EA T1
+    - cron: "0 16 * * 4"
+    #EA TP1
+    - cron: "0 18 * * 4"
+    #BD PL5
+    - cron: "0 9 * * 5"
+    #EA PL3
+    - cron: "0 11 * * 5"
+    #BD T1
+    - cron: "0 14 * * 5"
+    #BD TP1
+    - cron: "0 16 * * 5"
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      - uses: browser-actions/setup-geckodriver@latest
+      - name: Setup geckdriver
+        run: geckodriver --version
+        
+      - name: Install selenium
+        run: pip3 install selenium
+  
+      - name: Mark Attendance
+        env:
+          UCSTUDENT_USERNAME: ${{ secrets.UCSTUDENT_USERNAME }}
+          UCSTUDENT_KEY: ${{ secrets.UCSTUDENT_KEY }}
+        run: python3 main.py
