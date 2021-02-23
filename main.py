@@ -47,7 +47,6 @@ class Marker():
             wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
         except:
             print('❌ Button not found')
-            self.end()
             return False
         else:
             return True
