@@ -65,9 +65,9 @@ class Marker():
                 if self.hasButton(buttonsXPath[2]):
                     button = self.driver.find_element_by_xpath(buttonsXPath[2])
                     button.click() 
-                    print('✅ Attendace marked')
+                    print('✅ Attendance marked')
             else:
-                print('❎ Attendace already marked ⚠️')
+                print('❎ Attendance already marked ⚠️')
         self.end()
 
     def end(self):
