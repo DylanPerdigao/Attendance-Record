@@ -6,10 +6,10 @@ from selenium.webdriver.common.by import By
 
 
 class Marker():
-    def __init__(self,username,password):
+    def __init__(self,url,username,password):
         self.username = username
         self.password = password
-        self.url = 'https://ucstudent.uc.pt/login'
+        self.url = url
         self.options = webdriver.FirefoxOptions()
         self.options.headless = True
         try:
@@ -75,6 +75,6 @@ class Marker():
         self.driver=None
 
 if __name__=='__main__':
-    m = Marker(os.environ['UCSTUDENT_USERNAME'],os.environ['UCSTUDENT_KEY'])
+    m = Marker(os.environ['URL'],os.environ['USERNAME'],os.environ['KEY'])
     m.login()
     m.mark_attendance()
