@@ -4,7 +4,7 @@
 
 ## Setup
   - Fork this project
-  - Create two secrets called "UCSTUDENT_USERNAME"(email) and "UCSTUDENT_KEY"(password)
+  - Create three secrets called "URL"(url of the login page), "USERNAME"(email) and "KEY"(password)
   - Make your schedule in .github/workflows/main.yml file
 
 ## Some informations
