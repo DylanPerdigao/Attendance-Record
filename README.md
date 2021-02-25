@@ -1,6 +1,8 @@
 # Attendance-Record
 
 [![Attendance Record](https://github.com/DylanPerdigao/Attendance-Record/actions/workflows/main.yml/badge.svg)](https://github.com/DylanPerdigao/Attendance-Record/actions/workflows/main.yml)
+[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+[![Version](https://badge.fury.io/gh/tterb%2FHyde.svg)](https://badge.fury.io/gh/tterb%2FHyde)
 
 ## Setup
   - Fork this project
