@@ -14,4 +14,7 @@
   - The workflow can have a latency of 5-10min
 
 ## Legal Advice
-I am not responsible for the fraudulent use of this program, the intention is not to forget to mark your presence in classes
+I am not responsible for the fraudulent use of this program, the intention is not to forget to mark your presence in classes. You need to disable the workflow if you're not present
+
+## Credits
+  - Original Idea of [Rodrigo Sobral](https://github.com/RodrigoSobral2000)
