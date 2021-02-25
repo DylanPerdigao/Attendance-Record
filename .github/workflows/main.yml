@@ -55,6 +55,7 @@ jobs:
   
       - name: Mark Attendance
         env:
-          UCSTUDENT_USERNAME: ${{ secrets.UCSTUDENT_USERNAME }}
-          UCSTUDENT_KEY: ${{ secrets.UCSTUDENT_KEY }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.KEY }}
+          LOGIN_PAGE: ${{ secrets.LOGIN_PAGE }}
         run: python3 main.py
