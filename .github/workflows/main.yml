@@ -57,5 +57,5 @@ jobs:
         env:
           USERNAME: ${{ secrets.USERNAME }}
           KEY: ${{ secrets.KEY }}
-          LOGIN_PAGE: ${{ secrets.LOGIN_PAGE }}
+          URL: ${{ secrets.URL }}
         run: python3 main.py
