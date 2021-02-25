@@ -1,7 +1,6 @@
 # Attendance-Record
 
 [![Attendance Record](https://github.com/DylanPerdigao/Attendance-Record/actions/workflows/main.yml/badge.svg)](https://github.com/DylanPerdigao/Attendance-Record/actions/workflows/main.yml)
-[![MIT License](https://github.com/DylanPerdigao/Attendance-Record/LICENSEs)](https://github.com/DylanPerdigao/Attendance-Record/LICENSEs)
 
 ## Setup
   - Fork this project
