@@ -53,21 +53,29 @@ class Marker():
 
     def mark_attendance(self):
         buttonsXPath=list()
-        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div[6]/div/div[8]/button[1]')
-        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/div/div[3]/div/button[2]')
-        buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]')
-        if self.hasButton(buttonsXPath[0]):
-            button = self.driver.find_element_by_xpath(buttonsXPath[0])
-            button.click() 
-            if self.hasButton(buttonsXPath[1]) and not self.isGreen(buttonsXPath[1]):
-                button = self.driver.find_element_by_xpath(buttonsXPath[1])
+        buttonsXPath.append(tuple('//*[@id="app"]/div/div[1]/div/div/div/div/div[',']/div/div[8]/button[1]'))#cadeira (por default primeiro tem indice 6)
+        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/div/div[3]/div/button[2]')#online
+        buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]')#confirmar
+        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/button')#voltar
+        for i in range(6,9):
+            if self.hasButton(buttonsXPath[0][0]+i+buttonsXPath[0][1]):
+                button = self.driver.find_element_by_xpath(buttonsXPath[0][0]+i+buttonsXPath[0][1])
                 button.click() 
-                if self.hasButton(buttonsXPath[2]):
-                    button = self.driver.find_element_by_xpath(buttonsXPath[2])
+                if self.hasButton(buttonsXPath[1]):
+                    if not self.isGreen(buttonsXPath[1]):
+                        button = self.driver.find_element_by_xpath(buttonsXPath[1])
+                        button.click() 
+                        if self.hasButton(buttonsXPath[2]):
+                            button = self.driver.find_element_by_xpath(buttonsXPath[2])
+                            button.click() 
+                            print('✅ Attendance marked')
+                        break
+                    else:
+                        print('❎ Attendance already marked ⚠️')
+                        break
+                else:
+                    button = self.driver.find_element_by_xpath(buttonsXPath[3])
                     button.click() 
-                    print('✅ Attendance marked')
-            else:
-                print('❎ Attendance already marked ⚠️')
         self.end()
 
     def end(self):
