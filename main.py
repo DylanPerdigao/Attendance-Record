@@ -58,8 +58,8 @@ class Marker():
         buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]')#confirmar
         buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/button')#voltar
         for i in range(6,9):
-            if self.hasButton(buttonsXPath[0][0]+i+buttonsXPath[0][1]):
-                button = self.driver.find_element_by_xpath(buttonsXPath[0][0]+i+buttonsXPath[0][1])
+            if self.hasButton(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1]):
+                button = self.driver.find_element_by_xpath(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1])
                 button.click() 
                 if self.hasButton(buttonsXPath[1]):
                     if not self.isGreen(buttonsXPath[1]):
