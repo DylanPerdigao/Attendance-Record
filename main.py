@@ -57,6 +57,8 @@ class Marker():
         buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/div/div[3]/div/button[2]')#online
         buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]')#confirmar
         buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/button')#voltar
+        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[6]/button')#voltar
+
         for i in range(6,9):
             if self.hasButton(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1]):
                 button = self.driver.find_element_by_xpath(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1])
@@ -74,8 +76,13 @@ class Marker():
                         print('❎ Attendance already marked ⚠️')
                         break
                 else:
-                    button = self.driver.find_element_by_xpath(buttonsXPath[3])
-                    button.click() 
+                    #verifica caso haja link da aula
+                    if self.hasButton(buttonsXPath[3]):
+                        button = self.driver.find_element_by_xpath(buttonsXPath[3])
+                        button.click()
+                    else:
+                        button = self.driver.find_element_by_xpath(buttonsXPath[4])
+                        button.click()
         self.end()
 
     def end(self):
