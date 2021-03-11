@@ -58,12 +58,19 @@ class Marker():
         buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]')#confirmar
         buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/button')#voltar
         buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[6]/button')#voltar
+        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/div/div/button')#entrar sala
+        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[5]/div/div[3]/div/button[2]')#online when sala
+
 
         for i in range(6,9):
             if self.hasButton(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1]):
                 button = self.driver.find_element_by_xpath(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1])
-                button.click() 
+                button.click()
+
                 if self.hasButton(buttonsXPath[1]):
+                    """
+                    When class is not in the platform
+                    """
                     if not self.isGreen(buttonsXPath[1]):
                         button = self.driver.find_element_by_xpath(buttonsXPath[1])
                         button.click() 
@@ -75,8 +82,26 @@ class Marker():
                     else:
                         print('❎ Attendance already marked ⚠️')
                         break
+
+                elif self.hasButton(buttonsXPath[5]):
+                    """
+                    When class is in the platform
+                    """
+                    if not self.isGreen(buttonsXPath[6]):
+                        button = self.driver.find_element_by_xpath(buttonsXPath[6])
+                        button.click() 
+                        if self.hasButton(buttonsXPath[2]):
+                            button = self.driver.find_element_by_xpath(buttonsXPath[2])
+                            button.click() 
+                            print('✅ Attendance marked')
+                        break
+                    else:
+                        print('❎ Attendance already marked ⚠️')
+                        break
                 else:
-                    #verifica caso haja link da aula
+                    """
+                    Return
+                    """
                     if self.hasButton(buttonsXPath[3]):
                         button = self.driver.find_element_by_xpath(buttonsXPath[3])
                         button.click()
