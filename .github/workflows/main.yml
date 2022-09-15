@@ -36,6 +36,9 @@ jobs:
         
       - name: Install selenium
         run: pip3 install selenium
+        
+      - name: Install Webdriver Manager
+        run: pip3 install webdriver_manager
   
       - name: Mark Attendance
         env:
