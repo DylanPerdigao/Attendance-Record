@@ -3,6 +3,9 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 
 class Marker():
@@ -13,9 +16,12 @@ class Marker():
         self.options = webdriver.FirefoxOptions()
         self.options.headless = True
         try:
-            self.driver = webdriver.Firefox(executable_path='./geckodriver_linux', options=self.options)
+            self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         except:
-            self.driver = webdriver.Firefox(executable_path='./geckodriver', options=self.options)
+            try:
+                self.driver = webdriver.Firefox(executable_path='./geckodriver_linux', options=self.options)
+            except:
+                self.driver = webdriver.Firefox(executable_path='./geckodriver', options=self.options)
 
     def login(self):
         #open url
