@@ -5,34 +5,18 @@ name: Attendance Record
 on:
   workflow_dispatch:
   schedule:
-    #FIA T1
-    - cron: "0 10 * * 1"
-    #FIA TP1
-    - cron: "0 12 * * 1"
-    #SD T1
-    - cron: "0 14 * * 2"
-    #SD TP1
-    - cron: "0 16 * * 2"
-    #FIA PL7
-    - cron: "0 9 * * 3"
-    #SD PL2
-    - cron: "0 9 * * 4"
-    #CT P3
-    - cron: "0 11 * * 4"
-    #CT T1
-    - cron: "0 14 * * 4"
-    #EA T1
-    - cron: "0 16 * * 4"
-    #EA TP1
-    - cron: "0 18 * * 4"
-    #BD PL5
-    - cron: "0 9 * * 5"
-    #EA PL3
-    - cron: "0 11 * * 5"
-    #BD T1
-    - cron: "0 14 * * 5"
-    #BD TP1
-    - cron: "0 16 * * 5"
+    #SBC
+    - cron: "30 9 * * 1"
+    #SBC
+    - cron: "30 11 * * 1"
+    #GP
+    - cron: "30 14 * * 1"
+    #CM
+    - cron: "30 16 * * 2"
+    #CM
+    - cron: "30 11 * * 3"
+    #GP
+    - cron: "50 18 * * 4"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
