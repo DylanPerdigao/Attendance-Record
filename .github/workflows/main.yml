@@ -29,16 +29,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      - uses: browser-actions/setup-geckodriver@latest
-      - name: Setup geckdriver
-        run: geckodriver --version
         
-      - name: Install selenium
-        run: pip3 install selenium
-        
-      - name: Install Webdriver Manager
-        run: pip3 install webdriver_manager
+      - name: Install requirements
+        run: pip3 install selenium, webdriver_manager, requests
   
       - name: Mark Attendance
         env:
