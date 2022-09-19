@@ -58,7 +58,7 @@ class Marker():
     def mark_attendance(self):
         buttonsXPath=list()
         for i in [1,2]:
-            buttonsXPath.append('//*[@id="app"]/div/main/div[2]/div/div/div[4]/div[2]/div[2]/div/div[{i}]/div[2]/div[2]/div[1]/button')#cadeira (por default primeiro tem indice 6)
+            buttonsXPath.append(f'//*[@id="app"]/div/main/div[2]/div/div/div[4]/div[2]/div[2]/div/div[{i}]/div[2]/div[2]/div[1]/button')#cadeira (por default primeiro tem indice 6)
             buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[1]') #local
             # buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[2]') #online
             buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]') #confirmar
