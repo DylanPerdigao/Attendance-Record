@@ -56,7 +56,7 @@ class Marker():
             return True
 
     def mark_attendance(self):
-        buttonsXPath=list()
+        buttonsXPath=[]
         for i in [1,2]:
             buttonsXPath.append(f'//*[@id="app"]/div/main/div[2]/div/div/div[4]/div[2]/div[2]/div/div[{i}]/div[2]/div[2]/div[1]/button')#cadeira (por default primeiro tem indice 6)
             buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[1]') #local
@@ -68,7 +68,7 @@ class Marker():
             if self.hasButton(b):
                 button = self.driver.find_element(By.XPATH,b)
                 button.click()
-                if i%4==2: #local or online
+                if i%4==1: #local or online
                     """
                     When class is not in the platform
                     """
