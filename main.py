@@ -64,52 +64,25 @@ class Marker():
             buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]') #confirmar
             buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[5]/button')#voltar a pagina anterior (cadeiras)
 
-        for i in range(6,9):
-            if self.hasButton(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1]):
-                button = self.driver.find_element(By.XPATH,buttonsXPath[0][0]+str(i)+buttonsXPath[0][1])
+        for i, b in enumerate(buttonsXPath):
+            if self.hasButton(b):
+                button = self.driver.find_element(By.XPATH,b)
                 button.click()
-
-                if self.hasButton(buttonsXPath[1]):
+                if i%4==2: #local or online
                     """
                     When class is not in the platform
                     """
-                    if not self.isGreen(buttonsXPath[1]):
-                        button = self.driver.find_element(By.XPATH,buttonsXPath[1])
+                    if not self.isGreen(b):
+                        button = self.driver.find_element(By.XPATH,b)
                         button.click() 
-                        if self.hasButton(buttonsXPath[2]):
-                            button = self.driver.find_element(By.XPATH,buttonsXPath[2])
+                        if self.hasButton(b):
+                            button = self.driver.find_element(By.XPATH,b)
                             button.click() 
                             print('✅ Attendance marked')
                         break
                     else:
                         print('❎ Attendance already marked ⚠️')
                         break
-
-                elif self.hasButton(buttonsXPath[5]):
-                    """
-                    When class is in the platform
-                    """
-                    if not self.isGreen(buttonsXPath[6]):
-                        button = self.driver.find_element(By.XPATH,buttonsXPath[6])
-                        button.click() 
-                        if self.hasButton(buttonsXPath[2]):
-                            button = self.driver.find_element(By.XPATH,buttonsXPath[2])
-                            button.click() 
-                            print('✅ Attendance marked')
-                        break
-                    else:
-                        print('❎ Attendance already marked ⚠️')
-                        break
-                else:
-                    """
-                    Return
-                    """
-                    if self.hasButton(buttonsXPath[3]):
-                        button = self.driver.find_element(By.XPATH,buttonsXPath[3])
-                        button.click()
-                    else:
-                        button = self.driver.find_element(By.XPATH,buttonsXPath[4])
-                        button.click()
         self.end()
 
     def end(self):
