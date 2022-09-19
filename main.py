@@ -49,22 +49,20 @@ class Marker():
         try:
             wait = WebDriverWait(self.driver,10)
             wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
-        except:
-            print('❌ Button not found')
+        except Exception as e:
+            print('❌ Button not found\n',e)
             return False
         else:
             return True
 
     def mark_attendance(self):
         buttonsXPath=list()
-        buttonsXPath.append(('//*[@id="app"]/div/div[1]/div/div/div/div/div[',']/div/div[8]/button[1]'))#cadeira (por default primeiro tem indice 6)
-        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/div/div[3]/div/button[2]')#online
-        buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]')#confirmar
-        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/button')#voltar
-        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[6]/button')#voltar
-        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/div/div/button')#entrar sala
-        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[5]/div/div[3]/div/button[1]')#online when sala
-
+        for i in [1,2]:
+            buttonsXPath.append('//*[@id="app"]/div/main/div[2]/div/div/div[4]/div[2]/div[2]/div/div[{i}]/div[2]/div[2]/div[1]/button')#cadeira (por default primeiro tem indice 6)
+            buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[1]') #local
+            # buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[2]') #online
+            buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]') #confirmar
+            buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[5]/button')#voltar a pagina anterior (cadeiras)
 
         for i in range(6,9):
             if self.hasButton(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1]):
