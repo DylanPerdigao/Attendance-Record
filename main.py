@@ -18,7 +18,7 @@ class Marker():
         try:
             self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
         except Exception as e:
-            print('❌ Driver not found')
+            print('❌ Driver not found\n',e)
 
     def login(self):
         #open url
