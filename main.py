@@ -17,27 +17,22 @@ class Marker():
         self.options.headless = True
         try:
             self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        except:
-            try:
-                self.driver = webdriver.Firefox(executable_path='./geckodriver_linux', options=self.options)
-            except:
-                self.driver = webdriver.Firefox(executable_path='./geckodriver', options=self.options)
+        except Exception as e:
+            print('❌ Driver not found')
 
     def login(self):
         #open url
         self.driver.get(self.url) 
-        #email   
-        email_input = self.driver.find_element_by_xpath('//*[@id="app"]/div/div/div/div[2]/div/div/form/div[1]/div/input')    
+        #email & pass  
+        email_input,pass_input = self.driver.find_elements(By.TAG_NAME,"input")[:2]
         email_input.send_keys(self.username)
-        #password
-        pass_input = self.driver.find_element_by_xpath('//*[@id="app"]/div/div/div/div[2]/div/div/form/div[2]/div/input')    
         pass_input.send_keys(self.password)
         #login
-        login_button = self.driver.find_element_by_xpath('//*[@id="app"]/div/div/div/div[2]/div/div/form/div[3]/button')    
+        login_button = self.driver.find_elements(By.TAG_NAME,"button")[0]    
         login_button.click()
 
     def isGreen(self,xpath):
-        button = self.driver.find_element_by_xpath(xpath)
+        button = self.driver.find_element(By.XPATH,xpath)
         color = button.value_of_css_property('background-color')
         if 'rgb' in color:
             rgb_color=color[4:-1].split(', ')
@@ -65,12 +60,12 @@ class Marker():
         buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/button')#voltar
         buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[6]/button')#voltar
         buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[4]/div/div/button')#entrar sala
-        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[5]/div/div[3]/div/button[2]')#online when sala
+        buttonsXPath.append('//*[@id="app"]/div/div[1]/div/div/div/div/div/div[5]/div/div[3]/div/button[1]')#online when sala
 
 
         for i in range(6,9):
             if self.hasButton(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1]):
-                button = self.driver.find_element_by_xpath(buttonsXPath[0][0]+str(i)+buttonsXPath[0][1])
+                button = self.driver.find_element(By.XPATH,buttonsXPath[0][0]+str(i)+buttonsXPath[0][1])
                 button.click()
 
                 if self.hasButton(buttonsXPath[1]):
@@ -78,10 +73,10 @@ class Marker():
                     When class is not in the platform
                     """
                     if not self.isGreen(buttonsXPath[1]):
-                        button = self.driver.find_element_by_xpath(buttonsXPath[1])
+                        button = self.driver.find_element(By.XPATH,buttonsXPath[1])
                         button.click() 
                         if self.hasButton(buttonsXPath[2]):
-                            button = self.driver.find_element_by_xpath(buttonsXPath[2])
+                            button = self.driver.find_element(By.XPATH,buttonsXPath[2])
                             button.click() 
                             print('✅ Attendance marked')
                         break
@@ -94,10 +89,10 @@ class Marker():
                     When class is in the platform
                     """
                     if not self.isGreen(buttonsXPath[6]):
-                        button = self.driver.find_element_by_xpath(buttonsXPath[6])
+                        button = self.driver.find_element(By.XPATH,buttonsXPath[6])
                         button.click() 
                         if self.hasButton(buttonsXPath[2]):
-                            button = self.driver.find_element_by_xpath(buttonsXPath[2])
+                            button = self.driver.find_element(By.XPATH,buttonsXPath[2])
                             button.click() 
                             print('✅ Attendance marked')
                         break
@@ -109,10 +104,10 @@ class Marker():
                     Return
                     """
                     if self.hasButton(buttonsXPath[3]):
-                        button = self.driver.find_element_by_xpath(buttonsXPath[3])
+                        button = self.driver.find_element(By.XPATH,buttonsXPath[3])
                         button.click()
                     else:
-                        button = self.driver.find_element_by_xpath(buttonsXPath[4])
+                        button = self.driver.find_element(By.XPATH,buttonsXPath[4])
                         button.click()
         self.end()
 
