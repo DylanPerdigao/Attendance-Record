@@ -6,17 +6,17 @@ on:
   workflow_dispatch:
   schedule:
     #SBC
-    - cron: "30 9 * * 1"
+    - cron: "0 9 * * 1"
     #SBC
-    - cron: "30 11 * * 1"
+    - cron: "0 11 * * 1"
     #GP
-    - cron: "30 14 * * 1"
+    - cron: "0 14 * * 1"
     #CM
-    - cron: "30 16 * * 2"
+    - cron: "0 16 * * 2"
     #CM
-    - cron: "30 11 * * 3"
+    - cron: "0 11 * * 3"
     #GP
-    - cron: "50 18 * * 4"
+    - cron: "0 18 * * 4"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
