@@ -16,10 +16,10 @@ class Marker():
         self.username = username
         self.password = password
         self.url = url
-        chrome_options = Options()
-        chrome_options.add_argument("--headless")
+        #chrome_options = Options()
+        #chrome_options.add_argument("--headless")
         try:
-            self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
+            self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))#,options=chrome_options)
         except Exception as e:
             print('❌ Driver not found\n',e)
 
@@ -47,7 +47,7 @@ class Marker():
 
     def hasButton(self, xpath):
         try:
-            wait = WebDriverWait(self.driver,10)
+            wait = WebDriverWait(self.driver,10,2)
             wait.until(EC.presence_of_element_located((By.XPATH, xpath)))
         except Exception as e:
             print('❌ Button not found\n',e)
@@ -58,36 +58,34 @@ class Marker():
     def mark_attendance(self):
         buttonsXPath=[]
         for i in [1,2]:
-            buttonsXPath.append(f'//*[@id="app"]/div/main/div[2]/div/div/div[4]/div[2]/div[2]/div/div[{i}]/div[2]/div[2]/div[1]/button')#cadeira (por default primeiro tem indice 6)
-            buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[1]') #local
+            buttonsXPath.append(("course",f'//*[@id="app"]/div/main/div[2]/div/div/div[4]/div[2]/div[2]/div/div[{i}]/div[2]/div[2]/div[1]/button'))#cadeira (por default primeiro tem indice 6)
+            buttonsXPath.append(("location",'//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[1]')) #local
             # buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[2]') #online
-            buttonsXPath.append('/html/body/div[2]/div[2]/footer/button[2]') #confirmar
-            buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[5]/button')#voltar a pagina anterior (cadeiras)
-
-        for i, b in enumerate(buttonsXPath):
+            buttonsXPath.append(("confirm",'//*[@class="dialog modal is-active"]/div[1]/footer/button[1]')) #confirmar 
+            buttonsXPath.append(("return",'//*[@id="app"]/div/main/div/div/div/div/div/div/div[5]/button'))#voltar a pagina anterior (cadeiras)
+        for i, (name,b) in enumerate(buttonsXPath):
+            print(name)
             if self.hasButton(b):
-                button = self.driver.find_element(By.XPATH,b)
-                button.click()
-                if i%4==1: #local or online
-                    """
-                    When class is not in the platform
-                    """
-                    if not self.isGreen(b):
+                if name in ["course", "return","location"]:
+                    if self.isGreen(b) and name == "location":
+                        print('❎ Attendance already marked ⚠️')
+                        self.end()
+                    else:
                         button = self.driver.find_element(By.XPATH,b)
                         button.click() 
-                        if self.hasButton(b):
-                            button = self.driver.find_element(By.XPATH,b)
-                            button.click() 
-                            print('✅ Attendance marked')
-                        break
-                    else:
-                        print('❎ Attendance already marked ⚠️')
-                        break
+            if name == 'confirm':
+                try:
+                    button = self.driver.find_element(By.CSS_SELECTOR,'.dialog.modal.is-active .button.is-primary')
+                    button.click() 
+                    print('✅ Attendance marked')
+                except:
+                    pass                   
         self.end()
 
     def end(self):
         self.driver.quit()
-        self.driver=None
+        print('👋 Bye')
+        exit()
 
 if __name__=='__main__':
     m = Marker(os.environ['URL'],os.environ['USERNAME'],os.environ['KEY'])
