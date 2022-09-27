@@ -16,10 +16,10 @@ class Marker():
         self.username = username
         self.password = password
         self.url = url
-        #chrome_options = Options()
-        #chrome_options.add_argument("--headless")
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")
         try:
-            self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))#,options=chrome_options)
+            self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
         except Exception as e:
             print('❌ Driver not found\n',e)
 
