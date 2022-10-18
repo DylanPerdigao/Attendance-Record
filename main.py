@@ -57,7 +57,8 @@ class Marker():
 
     def mark_attendance(self):
         buttonsXPath=[]
-        for i in [1,2]:
+        for i in [1,2]:  
+            buttonsXPath.append(('login','//*[@id="app"]/div/main/div/div/div/div/div[2]/div[1]/div/form/div[3]/button'))  #login button
             buttonsXPath.append(("course",f'//*[@id="app"]/div/main/div[2]/div/div/div[4]/div[2]/div[2]/div/div[{i}]/div[2]/div[2]/div[1]/button'))#cadeira (por default primeiro tem indice 6)
             buttonsXPath.append(("location",'//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[1]')) #local
             # buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[2]') #online
@@ -66,7 +67,7 @@ class Marker():
         for i, (name,b) in enumerate(buttonsXPath):
             print(name)
             if self.hasButton(b):
-                if name in ["course", "return","location"]:
+                if name in ["login","course", "return","location"]:
                     if self.isGreen(b) and name == "location":
                         print('❎ Attendance already marked ⚠️')
                         self.end()
