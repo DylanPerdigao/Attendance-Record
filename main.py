@@ -17,7 +17,7 @@ class Marker():
         self.password = password
         self.url = url
         chrome_options = Options()
-        chrome_options.add_argument("--headless")
+        #chrome_options.add_argument("--headless")
         try:
             self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
         except Exception as e:
@@ -56,14 +56,13 @@ class Marker():
             return True
 
     def mark_attendance(self):
-        buttonsXPath=[]
-        for i in [1,2]:  
-            buttonsXPath.append(('login','//*[@id="app"]/div/main/div/div/div/div/div[2]/div[1]/div/form/div[3]/button'))  #login button
-            buttonsXPath.append(("course",f'//*[@id="app"]/div/main/div[2]/div/div/div[4]/div[2]/div[2]/div/div[{i}]/div[2]/div[2]/div[1]/button'))#cadeira (por default primeiro tem indice 6)
-            buttonsXPath.append(("location",'//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[1]')) #local
-            # buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[2]') #online
-            buttonsXPath.append(("confirm",'//*[@class="dialog modal is-active"]/div[1]/footer/button[1]')) #confirmar 
-            buttonsXPath.append(("return",'//*[@id="app"]/div/main/div/div/div/div/div/div/div[5]/button'))#voltar a pagina anterior (cadeiras)
+        buttonsXPath=[] 
+        buttonsXPath.append(('login','//*[@id="app"]/div/main/div/div/div/div/div[2]/div[1]/div/form/div[3]/button'))  #login button
+        buttonsXPath.append(("course",'//*[@id="app"]/div/main/div/div/div[3]/div[1]/div[2]/div/div/div[2]/div[2]/div[1]/button'))#cadeira (por default primeiro tem indice 6)                           
+        buttonsXPath.append(("location",'//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[1]')) #local
+        # buttonsXPath.append('//*[@id="app"]/div/main/div/div/div/div/div/div/div[4]/div/div[3]/div/button[2]') #online
+        buttonsXPath.append(("confirm",'//*[@class="dialog modal is-active"]/div[1]/footer/button[1]')) #confirmar 
+        buttonsXPath.append(("return",'//*[@id="app"]/div/main/div/div/div/div/div/div/div[5]/button'))#voltar a pagina anterior (cadeiras)
         for i, (name,b) in enumerate(buttonsXPath):
             print(name)
             if self.hasButton(b):
