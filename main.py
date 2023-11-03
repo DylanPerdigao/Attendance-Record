@@ -17,7 +17,7 @@ class Marker():
         self.password = password
         self.url = url
         chrome_options = Options()
-        #chrome_options.add_argument("--headless")
+        chrome_options.add_argument("--headless")
         try:
             self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chrome_options)
         except Exception as e:
